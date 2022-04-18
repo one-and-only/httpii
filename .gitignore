@@ -1,0 +1,6 @@
+icon.png
+build**
+.DS_Store**
+.vscode
+*.dol
+*.elf

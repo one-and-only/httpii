@@ -1,0 +1,12 @@
+  <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <app version="1">
+    <name>HTTPii</name>
+    <coder>Antonios P. (@Revvz/@one-and-only</coder>
+    <version>1.0.0b</version>
+    <release_date>20220413080300</release_date>
+    <short_description>Wii Web Server</short_description>
+    <long_description>
+    An HTTP Web Server for the Wii [and vWii]!
+    Full support for SD card webroot and native internet connection support
+    </long_description>
+  </app>
