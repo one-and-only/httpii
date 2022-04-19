@@ -9,6 +9,15 @@ public:
     Filesystem();
     ~Filesystem();
     std::string readFileFromWebroot(std::string filePath);
+    enum class ErrorMap {
+        OK = 200,
+        CREATED = 201,
+        NOT_FOUND = 404,
+        INTERNAL_ERROR = 500,
+        FORBIDDEN = 403
+    };
+    ErrorMap GetError(std::string readFileRet);
+    std::string GetErrorString(ErrorMap err);
 
 private:
     bool can_open_webroot();

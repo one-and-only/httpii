@@ -103,6 +103,13 @@ namespace HTTPii::HTTPd
                     {
                         printf("Data received:\n\n%s", temp);
                         res_data = fs->readFileFromWebroot("index.html");
+                        const Filesystem::ErrorMap fileResCode = fs->GetError(res_data);
+                        if (fileResCode != Filesystem::ErrorMap::OK) {
+                            std::string errorString = fs->GetErrorString(fileResCode);
+                            res_data = errorString;
+                            res_status_code = errorString;
+                            res_status = "HTTP/1.1 " + res_status_code + "\r\n";
+                        }
                         net_send(csock, res_status.c_str(), strlen(res_status.c_str()), 0);
                         for (unsigned int i = 0; i < res_headers.size() - 1; i++)
                         {
