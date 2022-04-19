@@ -2,11 +2,14 @@
 #define HTTPII_NETWORK_H
 #include <network.h>
 #include <string>
+#include <string_view>
 #include <ogcsys.h>
+
 namespace HTTPii::HTTPd
 {
     static char LISTENING_HOST[16] = "0.0.0.0";
     constexpr static u16 LISTENING_PORT = 80;
+    constexpr std::string_view HTTPII_VERSION = "1.0.0b";
 
     /**
      * @brief Start httpd thread

@@ -97,6 +97,7 @@ namespace HTTPii::HTTPd
 
                     res_headers.push_back(new Header("Content-Type", "text/html"));
                     res_headers.push_back(new Header("Connection", "close")); // we don't support keep-alive
+                    res_headers.push_back(new Header("Server", "HTTPii " + std::string(HTTPII_VERSION)));
 
                     const char *http_get_index = "GET / HTTP/1.1\r\n";
                     if (!strncmp(temp, http_get_index, strlen(http_get_index)))
@@ -110,6 +111,7 @@ namespace HTTPii::HTTPd
                             res_status_code = errorString;
                             res_status = "HTTP/1.1 " + res_status_code + "\r\n";
                         }
+                        res_headers.push_back(new Header("Content-Length", std::to_string(res_data.length())));
                         net_send(csock, res_status.c_str(), strlen(res_status.c_str()), 0);
                         for (unsigned int i = 0; i < res_headers.size() - 1; i++)
                         {
