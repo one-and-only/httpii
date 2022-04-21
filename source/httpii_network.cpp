@@ -102,10 +102,10 @@ namespace HTTPii::HTTPd
                     const char *http_get_index = "GET / HTTP/1.1\r\n";
                     if (!strncmp(temp, http_get_index, strlen(http_get_index)))
                     {
-                        printf("Data received:\n\n%s", temp);
-                        res_data = fs->readFileFromWebroot("index.html");
+                        res_data = fs->readFileFromWebroot("/index.html");
                         const Filesystem::ErrorMap fileResCode = fs->GetError(res_data);
-                        if (fileResCode != Filesystem::ErrorMap::OK) {
+                        if (fileResCode != Filesystem::ErrorMap::OK)
+                        {
                             std::string errorString = fs->GetErrorString(fileResCode);
                             res_data = errorString;
                             res_status_code = errorString;
@@ -126,6 +126,22 @@ namespace HTTPii::HTTPd
                         continue;
                     }
                     // process other files other than the index page
+                    std::string req = std::string(temp);
+                    // get the first line of the request
+                    std::string firstLine = req.substr(0, req.find('\n', 0));
+
+                    // split string by spaces
+                    std::vector<std::string> words{};
+                    size_t pos = 0;
+                    while ((pos = firstLine.find(" ")) != std::string::npos)
+                    {
+                        words.push_back(firstLine.substr(0, pos));
+                        firstLine.erase(0, pos + std::string(" ").length());
+                    }
+
+                    // find the file extension
+                    std::string extension = words.at(1).substr(words.at(1).find_last_of(".") + 1);
+
                     net_close(csock);
                 }
             }

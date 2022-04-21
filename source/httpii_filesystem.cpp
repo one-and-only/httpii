@@ -61,7 +61,7 @@ std::string Filesystem::readFileFromWebroot(std::string filePath)
 {
     std::string line;
     std::string ret;
-    std::ifstream file("/apps/HTTPii/webroot/" + filePath);
+    std::ifstream file("/apps/HTTPii/webroot" + filePath);
     if (!file)
         return "FS_ERR_NOT_FOUND";
     while (file)
